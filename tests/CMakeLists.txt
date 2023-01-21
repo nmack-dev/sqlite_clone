@@ -8,7 +8,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(sqlite_clone_test hello_test.cpp ReplExecutorTest.cpp)
+add_executable(sqlite_clone_test ReplExecutorTest.cpp)
 
 target_link_libraries(
     sqlite_clone_test

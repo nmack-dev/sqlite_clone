@@ -1,26 +1,28 @@
 #include <gtest/gtest.h>
+#include <ostream>
+#include <iostream>
 
 #include "ReplExecutor.h"
+
+ReplExecutor* repl;
 
 class ReplExecutorTest : public ::testing::Test 
 {
 protected:
     ReplExecutorTest()
     {
-        ReplExecutor repl = new ReplExecutor();
+        repl = new ReplExecutor();
     }
 
     ~ReplExecutorTest()
     {
         delete repl;
     }
-}
+};
 
-TEST(ReplExecutorTest, BasicAssertions) {
-    // Expect two strings not to be equal.
-    EXPECT_STRNE("hello", "world");
-    // Expect equality.
-    EXPECT_EQ(7 * 6, 42);
+TEST(ReplExecutorTest, ReplExecutorReturns)
+{
+    EXPECT_EQ(repl->Run(), 1);
 }
 
 int main(int argc, char **argv) {
