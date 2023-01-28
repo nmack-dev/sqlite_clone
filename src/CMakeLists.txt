@@ -1,10 +1,11 @@
 
-file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h")
+# file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h")
 
-add_library(sqlite_clone_lib ReplExecutor.cpp ${HEADER_LIST})
+# # Insert files below
+# add_library(sqlite_clone_lib ${HEADER_LIST})
 
-# We need this directory, and users of our library will need it too
-target_include_directories(sqlite_clone_lib PUBLIC ../include)
+# # We need this directory, and users of our library will need it too
+# target_include_directories(sqlite_clone_lib PUBLIC ../include)
 
 # This depends on (header only) boost
 # target_link_libraries(modern_library PRIVATE Boost::boost)
