@@ -9,7 +9,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 # Insert files below
-add_executable(sqlite_clone_test InputHandlerTest.cpp)
+add_executable(sqlite_clone_test InputHandlerTest.cpp TableTest.cpp)
 
 target_link_libraries(
     sqlite_clone_test

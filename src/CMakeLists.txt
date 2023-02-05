@@ -2,7 +2,7 @@
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h")
 
 # Insert files below
-add_library(sqlite_clone_lib InputHandler.cpp ${HEADER_LIST})
+add_library(sqlite_clone_lib InputHandler.cpp Table.cpp ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
 target_include_directories(sqlite_clone_lib PUBLIC ../include)

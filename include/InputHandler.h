@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "Row.h"
+
 typedef enum 
 {
     META_COMMAND_SUCCESS,
@@ -23,6 +25,7 @@ typedef enum
 
 typedef struct {
     StatementType type;
+    Row rowToInsert;
 } Statement;
 
 class InputHandler
@@ -36,4 +39,4 @@ public:
     static bool IsMetaCommand(std::string& input);
 };
 
-#endif // __INPUTHANDLER_
+#endif // _INPUTHANDLER_
