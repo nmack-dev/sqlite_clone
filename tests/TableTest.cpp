@@ -22,7 +22,7 @@ protected:
     }
 };
 
-TEST_F(TableTest, AddGetRowTest)
+TEST_F(TableTest, AddGetRow)
 {
     Row newRow = {1, "testUsername", "testEmail@test.com"};
     Row returnRow;

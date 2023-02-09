@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Row.h"
+#include "Table.h"
 
 typedef enum 
 {
@@ -14,7 +14,9 @@ typedef enum
 typedef enum 
 {
     PREPARE_SUCCESS,
-    PREPARE_UNRECOGNIZED_STATEMENT
+    PREPARE_UNRECOGNIZED_STATEMENT,
+    PREPARE_SYNTAX_ERROR,
+    PREPARE_FAILURE
 } PrepareResult;
 
 typedef enum
@@ -23,10 +25,18 @@ typedef enum
     STATEMENT_SELECT
 } StatementType;
 
-typedef struct {
+typedef struct 
+{
     StatementType type;
     Row rowToInsert;
 } Statement;
+
+typedef enum 
+{
+    EXECUTE_SUCCESS,
+    EXECUTE_FAILURE,
+    EXECUTE_TABLE_FULL
+} StatementResult;
 
 class InputHandler
 {
@@ -35,8 +45,12 @@ public:
     ~InputHandler() {}
 
     static MetaCommandResult DoMetaCommand(std::string& metaCommand);
-    static PrepareResult PrepareStatement(std::string& input, Statement& statement);
     static bool IsMetaCommand(std::string& input);
+    
+    static PrepareResult PrepareStatement(std::string& input, Statement& statement);
+
+    static StatementResult ExecuteInsert(Statement& statement, Table* table);
+    static StatementResult ExecuteSelect(Statement& statement, Table* table);
 };
 
 #endif // _INPUTHANDLER_

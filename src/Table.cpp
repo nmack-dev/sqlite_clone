@@ -46,3 +46,8 @@ void Table::GetRow(unsigned int rowNum, Row& destination)
     memcpy(destination.username, source + COLUMN_ID_SIZE, COLUMN_USERNAME_SIZE);
     memcpy(destination.email, source + COLUMN_ID_SIZE + COLUMN_USERNAME_SIZE, COLUMN_EMAIL_SIZE);
 }
+
+unsigned int Table::GetRowNum()
+{
+    return tableStructure->numRows;
+}
