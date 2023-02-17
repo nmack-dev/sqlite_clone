@@ -8,14 +8,15 @@ As-is, the database only supports a couple of commands, and only allows you to c
 - [Table of Contents](#table-of-contents)
 - [Requirements](#requirements)
 - [Usage](#usage)
-  - [Building](#build)
-  - [Commands](#run)
-  - [Testing](#test)
+  - [Build](#build)
+  - [Run](#run)
+  - [Test](#test)
   - [Statements](#statements)
 - [TODOS](#todos)
 
 # Requirements
 - CMake 3.14 or above
+- Some version of Linux (other OS's not tested)
 
 # Usage
 
@@ -30,5 +31,12 @@ As-is, the database only supports a couple of commands, and only allows you to c
 - `./build/tests/sqlite_clone_test`
 
 ## Statements
+Current implemented statements are `SELECT` and `INSERT`. `SELECT` returns all
+current entries in the database table. `INSERT` inserts an entry (row) into the
+table.
 
 # TODOS
+- Create a thread worker to run the REPL. This way, the app can focus on thread management instead of running the REPL to handle input.
+- Create a threaded class to allow for multiple named tables.
+- Add more commands, e.g. remove, etc.
+- Implement a thread-safe queue to pass data between the REPL thread and table threads.
