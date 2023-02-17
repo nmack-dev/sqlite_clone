@@ -4,15 +4,20 @@ This is a very basic sqlite clone written in C++. It is inspired by the [Lets Bu
 As-is, the database only supports a couple of commands, and only allows you to create one table. Both the `Table` and `InputHandler` APIs are unit tested.
 
 # Table of Contents
-- [TOC]
+- [sqlite\_clone](#sqlite_clone)
+- [Table of Contents](#table-of-contents)
+- [Requirements](#requirements)
+- [Usage](#usage)
+  - [Building](#build)
+  - [Commands](#run)
+  - [Testing](#test)
+  - [Statements](#statements)
+- [TODOS](#todos)
 
 # Requirements
 - CMake 3.14 or above
 
 # Usage
-- `cmake -S . -B build`
-- `cmake --build build`
-- `./build/apps/sqlite_clone`
 
 ## Build
 - `cmake -S . -B build`
@@ -22,8 +27,8 @@ As-is, the database only supports a couple of commands, and only allows you to c
 - `./build/apps/sqlite_clone`
 
 ## Test
-- `./build/apps/sqlite_clone_test`
+- `./build/tests/sqlite_clone_test`
 
-## Commands
+## Statements
 
 # TODOS
