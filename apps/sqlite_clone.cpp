@@ -29,6 +29,12 @@ int main()
                 case PREPARE_SYNTAX_ERROR:
                     std::cout << "Statement Syntax Error: " << input_string << '.' << std::endl;
                     continue;
+                case PREPARE_STRING_TOO_LONG:
+                    std::cout << "Input string is too long!" << std::endl;
+                    continue;
+                case PREPARE_INVALID_ID:
+                    std::cout << "Invalid ID input!" << std::endl;
+                    continue;
                 case PREPARE_UNRECOGNIZED_STATEMENT:
                     std::cout << "Unrecognized keyword: " << input_string << '.' << std::endl;
                     continue;

@@ -51,14 +51,36 @@ TEST(InputHandlerTest, PrepareStatementUnrecognized)
 {
     std::string input = "unrecognized";
     Statement statement;
-    EXPECT_EQ(PREPARE_UNRECOGNIZED_STATEMENT,  InputHandler::PrepareStatement(input, statement));
+    EXPECT_EQ(PREPARE_UNRECOGNIZED_STATEMENT, InputHandler::PrepareStatement(input, statement));
 }
 
 TEST(InputHandlerTest, PrepareStatementSyntaxError)
 {
     std::string input = "insert 0";
     Statement statement;
-    EXPECT_EQ(PREPARE_SYNTAX_ERROR,  InputHandler::PrepareStatement(input, statement));
+    EXPECT_EQ(PREPARE_SYNTAX_ERROR, InputHandler::PrepareStatement(input, statement));
+}
+
+TEST(InputHandlerTest, PrepareStatementStringTooLong)
+{
+    std::string input = "insert 5 ffffffffffffffffffffffffffffffffffffffff test";
+    Statement statement;
+    EXPECT_EQ(PREPARE_STRING_TOO_LONG, InputHandler::PrepareStatement(input, statement));
+
+    input = "insert 5 test ";
+
+    for (int i = 0; i < 300; i++) {
+        input.append("f");
+    }
+    
+    EXPECT_EQ(PREPARE_STRING_TOO_LONG, InputHandler::PrepareStatement(input, statement));
+}
+
+TEST(InputHandlerTest, InvalidInputId)
+{
+    std::string input = "insert -1 test test@gmail.com";
+    Statement statement;
+    EXPECT_EQ(PREPARE_INVALID_ID, InputHandler::PrepareStatement(input, statement));
 }
 
 TEST(InputHandlerTest, ExecuteInsert)

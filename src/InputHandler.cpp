@@ -1,6 +1,7 @@
 #include "InputHandler.h"
 
 #include <iostream>
+#include <string.h>
 
 MetaCommandResult InputHandler::DoMetaCommand(std::string& metaCommand)
 {
@@ -18,17 +19,29 @@ PrepareResult InputHandler::PrepareStatement(std::string& input, Statement& stat
     if (0 == input.compare(0, 6, "insert")) {
         statement.type = STATEMENT_INSERT;
         
-        int args = sscanf(
-            input.c_str(), "insert %u %s %s", 
-            &statement.rowToInsert.id,
-            statement.rowToInsert.username,
-            statement.rowToInsert.email
-        );
+        char* keyword = strtok(const_cast<char*>(input.c_str()), " ");
+        char* id_string = strtok(nullptr, " ");
+        char* username = strtok(nullptr, " ");
+        char* email = strtok(nullptr, " ");
 
-        if (args < 3) {
+        if (nullptr == id_string || nullptr == username || nullptr == email) {
             result = PREPARE_SYNTAX_ERROR;
         } else {
-            result = PREPARE_SUCCESS;
+            int id = std::atoi(id_string);
+
+            if (0 > id) {
+                result = PREPARE_INVALID_ID;
+            } else if (COLUMN_USERNAME_SIZE < strlen(username)) {
+                result = PREPARE_STRING_TOO_LONG;
+            } else if (COLUMN_EMAIL_SIZE < strlen(email)) {
+                result = PREPARE_STRING_TOO_LONG;
+            } else {
+                statement.rowToInsert.id = (unsigned)id;
+                strncpy(statement.rowToInsert.username, username, COLUMN_USERNAME_SIZE);
+                strncpy(statement.rowToInsert.email, email, COLUMN_EMAIL_SIZE);
+                
+                result = PREPARE_SUCCESS;
+            }
         }
     } else if (0 == input.compare("select")) {
         statement.type = STATEMENT_SELECT;
